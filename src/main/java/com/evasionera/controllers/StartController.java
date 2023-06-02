@@ -36,7 +36,7 @@ public class StartController {
 
     @FXML
     public void startGame() {
-        Main.switchToGameView();
+//        Main.switchToGameView();
 
 //        String ghostName = ghostNameField.getText();
 //        String personName = personNameField.getText();

@@ -17,6 +17,36 @@
   - [開發工具](#開發工具)
   - [參考資料](#參考資料)
 
+## Usage
+
+### Prerequisite
+
+- [Java 17.0.7 LTS](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) (or above)
+- [JavaFX 17.0.7 LTS](https://gluonhq.com/products/javafx/) (or above)
+- [Maven 3.9.2](https://maven.apache.org/download.cgi) (or above)
+- (Optional for dev) [Scene Builder 19.0.0](https://gluonhq.com/products/scene-builder/#download) (or above)
+### Run in Terminal
+
+```bash
+git clone 
+cd evasion-era
+mvn clean javafx:run
+```
+
+### Build
+
+```bash
+mvn clean package
+```
+
+### In IDE
+
+添加  VM options 才可執行
+
+```bash
+--module-path /Library/Java/JavaVirtualMachines/javafx-sdk-17.0.7/lib --add-modules javafx.controls,javafx.fxml
+```
+
 ## 遊戲簡介
 
 > 文案修改自 ChatGPT-4
@@ -90,6 +120,16 @@
 - [JavaFX](https://openjfx.io/)
 - [Scene Builder](https://gluonhq.com/products/scene-builder/)
 - [JavaFX CSS Reference Guide](https://openjfx.io/javadoc/16/javafx.graphics/javafx/scene/doc-files/cssref.html)
+
+## 簡報規劃
+
+- 封面: 主題、組員
+- 開發工具
+- 遊戲簡介、規則
+- DEMO
+- 困難的點
+- 未來改善的方向
+- 參考資料
 
 ## 參考資料
 

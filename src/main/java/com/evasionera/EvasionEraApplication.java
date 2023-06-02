@@ -53,11 +53,11 @@ public class EvasionEraApplication extends Application {
         ruleScene = new Scene(rule, 1280, 720);
 
 
-        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/com/evasionera/game-view.fxml"));
-        Parent game = gameLoader.load();
-        GameController gameController = gameLoader.getController();
-        gameController.setMain(this);
-        gameScene = new Scene(game, 1280, 720);
+//        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/com/evasionera/game-view.fxml"));
+//        Parent game = gameLoader.load();
+//        GameController gameController = gameLoader.getController();
+//        gameController.setMain(this);
+//        gameScene = new Scene(game, 1280, 720);
 
         primaryStage.setTitle("Evasion Era");
         primaryStage.setScene(homeScene);
@@ -75,8 +75,8 @@ public class EvasionEraApplication extends Application {
     public void switchToHomeView() {
         stage.setScene(homeScene);
     }
-    public void switchToGameView() {
-        stage.setScene(gameScene);
-    }
+//    public void switchToGameView() {
+//        stage.setScene(gameScene);
+//    }
 
 }
