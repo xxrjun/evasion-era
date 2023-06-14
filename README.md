@@ -6,15 +6,21 @@
 
 - [Evasion Era - 11202 計算機概論 II Final Project](#evasion-era---11202-計算機概論-ii-final-project)
   - [目錄](#目錄)
+  - [Usage](#usage)
+    - [Prerequisite](#prerequisite)
+    - [Run in Terminal](#run-in-terminal)
+    - [Build](#build)
+    - [In IDE](#in-ide)
   - [遊戲簡介](#遊戲簡介)
   - [遊戲流程](#遊戲流程)
     - [首頁 (`home-view.fxml`)](#首頁-home-viewfxml)
-    - [開始畫面 (`start-view.fxml`)](#開始畫面-start-viewfxml)
+    - [遊戲設置畫面 (`game-setup.fxml`)](#遊戲設置畫面-game-setupfxml)
     - [遊戲規則 \& 操作教學 (`rule-view.fxml`)](#遊戲規則--操作教學-rule-viewfxml)
     - [遊戲進行畫面 (`game-view.fxml`)](#遊戲進行畫面-game-viewfxml)
     - [遊戲結束畫面 (`end-view.fxml`)](#遊戲結束畫面-end-viewfxml)
   - [Features Todo](#features-todo)
   - [開發工具](#開發工具)
+  - [簡報規劃](#簡報規劃)
   - [參考資料](#參考資料)
 
 ## Usage
@@ -25,10 +31,11 @@
 - [JavaFX 17.0.7 LTS](https://gluonhq.com/products/javafx/) (or above)
 - [Maven 3.9.2](https://maven.apache.org/download.cgi) (or above)
 - (Optional for dev) [Scene Builder 19.0.0](https://gluonhq.com/products/scene-builder/#download) (or above)
+
 ### Run in Terminal
 
 ```bash
-git clone 
+git clone
 cd evasion-era
 mvn clean javafx:run
 ```
@@ -41,7 +48,7 @@ mvn clean package
 
 ### In IDE
 
-添加  VM options 才可執行
+添加 VM options 才可執行
 
 ```bash
 --module-path /Library/Java/JavaVirtualMachines/javafx-sdk-17.0.7/lib --add-modules javafx.controls,javafx.fxml
@@ -62,7 +69,7 @@ mvn clean package
 - 按下「開始遊戲」按鈕後，進入遊戲開始畫面。
 - 按下「遊戲規則 & 操作教學」按鈕後，進入遊戲規則 & 操作教學畫面。
 
-### 開始畫面 (`start-view.fxml`)
+### 遊戲設置畫面 (`game-setup.fxml`)
 
 > 可以點選 Back to Home 按鈕回到首頁。
 
@@ -83,7 +90,7 @@ mvn clean package
 **操作教學**
 
 - 人: 鍵盤 WSAD 控制移動，空白鍵使用特殊能力(短暫加速 1.5 秒)。
-  - 特殊能力冷卻時間 5 秒。
+  - 特殊能力冷卻時間 5 秒，也就是每 5 秒即可使用一次。
 - 鬼: 鍵盤上下左右鍵控制移動。
 
 ### 遊戲進行畫面 (`game-view.fxml`)
@@ -105,14 +112,23 @@ mvn clean package
   - [x] 遊戲規則 & 操作教學按鈕
   - [x] 開始遊戲按鈕
 - [x] 遊戲規則介紹、操作教學畫面
-- [x] 開始畫面
+- [x] 遊戲設定畫面
   - [x] 使用者輸入鬼和人的名稱
+  - [ ] 設定遊戲時限
   - [x] 選擇石頭數量
 - [ ] 遊戲進行畫面
-  - [ ] 人與鬼可以按照鍵盤控制移動
-  - [ ] 人可以按下空白鍵使用特殊能力(短暫加速 1.5 秒)
-- [ ] 遊戲結束畫面
-  - 顯示獲勝方、耗時
+  - [x] 人與鬼可以按照鍵盤控制移動(WASD、上下左右)
+  - [x] 人可以按下空白鍵使用特殊能力(短暫加速 1.5 秒)
+  - [ ] 石頭
+- [x] 遊戲結束畫面
+  - [x] 顯示獲勝方、耗時
+  - [x] 回到開始畫面按鈕
+
+Improvements & Bugs
+
+- [ ] feat: 人與鬼上方應該添加名稱
+- [ ] feat: 遊戲過程介面可以再優化好看一點
+- [x] bugs: 重新開始遊戲時，應該要清除上一局的資料
 
 ## 開發工具
 
