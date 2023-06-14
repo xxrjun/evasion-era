@@ -1,47 +1,60 @@
+// Ghost.java
 package com.evasionera.models;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.util.Objects;
 
 public class Ghost {
-    private static final double MOVEMENT_SPEED = 6.0;
+    private double x, y;
+    private final double speed = 4.0;
 
-    private ImageView imageView;
-    private boolean hasCaughtPlayer;
-    // Add other necessary properties
+    private static final double WIDTH = 50.0;
+    private static final double HEIGHT = 50.0;
+    private static final double WINDOW_WIDTH = 1280.0;
+    private static final double WINDOW_HEIGHT = 720.0;
 
-    public Ghost(ImageView imageView) {
-        this.imageView = imageView;
-        // Initialize other properties
-
-        initializeImage();
-    }
-
-    private void initializeImage() {
-        Image ghostImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/ghost.png")));
-        imageView.setImage(ghostImage);
+    public Ghost(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void moveUp() {
-        // Move the ghost up
+        y -= speed;
+        checkBounds();
     }
 
     public void moveDown() {
-        // Move the ghost down
+        y += speed;
+        checkBounds();
     }
 
     public void moveLeft() {
-        // Move the ghost left
+        x -= speed;
+        checkBounds();
     }
 
     public void moveRight() {
-        // Move the ghost right
+        x += speed;
+        checkBounds();
     }
 
-    public boolean hasCaughtPlayer() {
-        // Return whether the ghost has caught the player
-        return hasCaughtPlayer;
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    private void checkBounds() {
+        if (x < 0) {
+            x = 0;
+        } else if (x > WINDOW_WIDTH - WIDTH) {
+            x = WINDOW_WIDTH - WIDTH;
+        }
+
+        if (y < 0) {
+            y = 0;
+        } else if (y > WINDOW_HEIGHT - HEIGHT) {
+            y = WINDOW_HEIGHT - HEIGHT;
+        }
     }
 }

@@ -1,148 +1,145 @@
+// GameController.java
 package com.evasionera.controllers;
 
-import com.evasionera.EvasionEraApplication;
 import com.evasionera.models.Ghost;
-import com.evasionera.models.MyTimer;
 import com.evasionera.models.Player;
+import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 
-public class GameController {
+import java.util.HashSet;
+import java.util.Set;
+
+public class GameController extends BaseController {
+    private static final Set<KeyCode> keys = new HashSet<>();
     @FXML
-    private Pane gamePane;
+    private ImageView playerImage;
     @FXML
-    private ImageView playerImageView;
+    private ImageView ghostImage;
     @FXML
-    private ImageView ghostImageView;
+    private Label timeLabel;
+    @FXML
+    private AnchorPane gamePane;
+    private static boolean isGameOver = false;
+    private static Player player;
+    private static Ghost ghost;
+    private static long startTime;
 
-    private Player player;
-    private Ghost ghost;
-    private MyTimer myTimer;
-
-    private EvasionEraApplication Main;
-
-
-    public void setMain(EvasionEraApplication Main) {
-        this.Main = Main;
-    }
-
+    @FXML
     public void initialize() {
-        // Initialize player, ghost, and timer objects
-        player = new Player(playerImageView);
-        ghost = new Ghost(ghostImageView);
-        myTimer = new MyTimer();
-        myTimer.setOnCountdownListener(this::handleCountdown); // Add event listener for countdown updates
-        myTimer.start(60); // Start the timer with a duration of 60 seconds
+        player = new Player(0, 400);
+        ghost = new Ghost(1200, 400);
+        startTime = System.currentTimeMillis();
+
+        gamePane.setFocusTraversable(true);
+        Platform.runLater(() -> {
+            gamePane.requestFocus();
+            gamePane.getScene().addEventFilter(KeyEvent.KEY_PRESSED, event -> keys.add(event.getCode()));
+            gamePane.getScene().addEventFilter(KeyEvent.KEY_RELEASED, event -> keys.remove(event.getCode()));
+        });
+
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                handleKeys();
+                player.update();
+                updatePositions();
+                updateTime();
+                checkGameOver();
+            }
+        }.start();
     }
 
-    public void handleKeyPress(KeyEvent event) {
-        // Handle key press events for player movement
-        switch (event.getCode()) {
-            case W:
-                player.moveUp();
-                break;
-            case S:
-                player.moveDown();
-                break;
-            case A:
-                player.moveLeft();
-                break;
-            case D:
-                player.moveRight();
-                break;
-            case SPACE:
-                player.useAbility();
-                break;
-            default:
-                break;
+
+    /**
+     * Handle key presses
+     */
+    private void handleKeys() {
+        if (keys.contains(KeyCode.W)) {
+            player.moveUp();
+        }
+        if (keys.contains(KeyCode.S)) {
+            player.moveDown();
+        }
+        if (keys.contains(KeyCode.A)) {
+            player.moveLeft();
+            playerImage.setScaleX(-1); // Flip image horizontally
+        }
+        if (keys.contains(KeyCode.D)) {
+            player.moveRight();
+            playerImage.setScaleX(1); // Reset image to original orientation
+        }
+        if (keys.contains(KeyCode.SPACE)) {
+            player.boost();
+        }
+        if (keys.contains(KeyCode.UP)) {
+            ghost.moveUp();
+        }
+        if (keys.contains(KeyCode.DOWN)) {
+            ghost.moveDown();
+        }
+        if (keys.contains(KeyCode.LEFT)) {
+            ghost.moveLeft();
+            ghostImage.setScaleX(-1); // Flip image horizontally
+        }
+        if (keys.contains(KeyCode.RIGHT)) {
+            ghost.moveRight();
+            ghostImage.setScaleX(1); // Reset image to original orientation
         }
     }
 
-    public void handleKeyRelease(KeyEvent event) {
-        // Handle key release events for player movement
-        switch (event.getCode()) {
-            case W:
-            case S:
-                player.stopVerticalMovement();
-                break;
-            case A:
-            case D:
-                player.stopHorizontalMovement();
-                break;
-            default:
-                break;
+    /**
+     * Update player and ghost positions
+     */
+    private void updatePositions() {
+        playerImage.setTranslateX(player.getX());
+        playerImage.setTranslateY(player.getY());
+        ghostImage.setTranslateX(ghost.getX());
+        ghostImage.setTranslateY(ghost.getY());
+    }
+
+    /**
+     * Update time label
+     */
+    private void updateTime() {
+        long currentTime = System.currentTimeMillis();
+        long elapsedTime = currentTime - startTime;
+        long remainingTime = 60000 - elapsedTime; // 60 seconds in milliseconds
+        timeLabel.setText("Time: " + remainingTime / 1000);
+    }
+
+    /**
+     * Check if game is over
+     */
+    private void checkGameOver() {
+        if (isGameOver) {
+            return;
+        }
+
+        if (Math.abs(player.getX() - ghost.getX()) < 50 && Math.abs(player.getY() - ghost.getY()) < 50) {
+            System.out.println("Game Over, Ghost is Win!");
+            isGameOver = true;
+            main.switchToScene("end", "Ghost is Win!\nTime consuming: " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
+        } else if (System.currentTimeMillis() - startTime >= 60000) {
+            System.out.println("Game Over, Player is Win!");
+            isGameOver = true;
+            main.switchToScene("end", "Player is Win!");
         }
     }
 
-    private void handleCountdown(int remainingTime) {
-        // Update game state based on remaining time
-        if (remainingTime == 0) {
-            // Game over, handle game result
-            boolean isGhostWinner = ghost.hasCaughtPlayer();
-            handleGameOver(isGhostWinner);
-        }
+    /**
+     * Reset game state to initial state
+     */
+    public static void reset() {
+        isGameOver = false;
+        player = new Player(0, 400);
+        ghost = new Ghost(1200, 400);
+        startTime = System.currentTimeMillis();
+        keys.clear();
     }
-
-    private void handleGameOver(boolean isGhostWinner) {
-        // Handle game over logic (e.g., display winner, reset game, etc.)
-
-        if(isGhostWinner){
-            System.out.println("Ghost wins");
-        }else{
-            System.out.println("Player wins");
-        }
-    }
-
-//    @FXML
-//    private Pane gamePane;
-//
-//    @FXML
-//    private ImageView playerImageView;
-//
-//    @FXML
-//    private Label timeLabel;
-//
-//    @FXML
-//    private Pane playerPane;
-//
-//
-//    private Player player;
-//
-//    private EvasionEraApplication Main;
-//
-//    public void setMain(EvasionEraApplication Main) {
-//        this.Main = Main;
-//    }
-//
-//
-//    public void initialize() {
-//        playerImageView = new ImageView("/images/player.png");
-//        player = new Player(playerImageView , "player");
-//
-//        gamePane.setFocusTraversable(true);
-//        gamePane.setOnKeyPressed(this::handleKeyPressed);
-//        gamePane.setOnKeyReleased(this::handleKeyReleased);
-//
-//        // TODO: Start a timer to update the remaining time
-//    }
-//
-//    private void handleKeyPressed(KeyEvent event) {
-//        switch (event.getCode()) {
-//            case W -> player.moveUp();
-//            case S -> player.moveDown();
-//            case A -> player.moveLeft();
-//            case D -> player.moveRight();
-//            case SPACE -> player.speedUp();
-//        }
-//    }
-//
-//    private void handleKeyReleased(KeyEvent event) {
-//        if (event.getCode() == KeyCode.SPACE) {
-//            player.speedDown();
-//        }
-//    }
 }
