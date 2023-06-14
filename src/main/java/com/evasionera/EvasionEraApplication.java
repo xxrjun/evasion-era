@@ -1,9 +1,6 @@
 package com.evasionera;
 
-import com.evasionera.controllers.GameController;
-import com.evasionera.controllers.HomeController;
-import com.evasionera.controllers.RuleController;
-import com.evasionera.controllers.StartController;
+import com.evasionera.controllers.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,72 +8,74 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EvasionEraApplication extends Application {
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(EvasionEraApplication.class.getResource("home-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
-//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/styles.css")).toExternalForm());
-//        stage.setTitle("Evasion Era!");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
 
     public static void main(String[] args) {
         launch();
     }
     private Stage stage;
-    private Scene homeScene, startScene, ruleScene, gameScene;
+    private Map<String, Scene> scenes = new HashMap<>();
+
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         this.stage = primaryStage;
 
-        FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("/com/evasionera/home-view.fxml"));
-        Parent home = homeLoader.load();
-        HomeController homeController = homeLoader.getController();
-        homeController.setMain(this);
-        homeScene = new Scene(home, 1280, 720);
+        try {
+            scenes.put("home", loadScene("/com/evasionera/home-view.fxml"));
+            scenes.put("setup", loadScene("/com/evasionera/game-setup-view.fxml"));
+            scenes.put("rule", loadScene("/com/evasionera/rule-view.fxml"));
+            scenes.put("game", loadScene("/com/evasionera/game-view.fxml"));
+            scenes.put("end", loadScene("/com/evasionera/end-view.fxml"));
+        } catch (IOException e){
 
-        FXMLLoader startLoader = new FXMLLoader(getClass().getResource("/com/evasionera/start-view.fxml"));
-        Parent start = startLoader.load();
-        StartController startController = startLoader.getController();
-        startController.setMain(this);
-        startScene = new Scene(start, 1280, 720);
-
-        FXMLLoader ruleLoader = new FXMLLoader(getClass().getResource("/com/evasionera/rule-view.fxml"));
-        Parent rule = ruleLoader.load();
-        RuleController ruleController = ruleLoader.getController();
-        ruleController.setMain(this);
-        ruleScene = new Scene(rule, 1280, 720);
-
-
-//        FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/com/evasionera/game-view.fxml"));
-//        Parent game = gameLoader.load();
-//        GameController gameController = gameLoader.getController();
-//        gameController.setMain(this);
-//        gameScene = new Scene(game, 1280, 720);
+        }
 
         primaryStage.setTitle("Evasion Era");
-        primaryStage.setScene(homeScene);
+        primaryStage.setScene(scenes.get("home"));
         primaryStage.show();
     }
 
-    public void switchToStartView() {
-        stage.setScene(startScene);
+    private Scene loadScene(String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        Parent root = loader.load();
+        BaseController controller = loader.getController();
+        controller.setMain(this);
+
+        Scene scene = new Scene(root, 1280, 720);
+        scene.setUserData(controller);  // Set the controller as the user data of the scene
+
+
+        return scene;
     }
 
-    public void switchToRuleView() {
-        stage.setScene(ruleScene);
+    public void switchToScene(String name) {
+        Scene scene = scenes.get(name);
+
+        BaseController controller = (BaseController) scene.getUserData();
+
+        stage.setScene(scene);
     }
 
-    public void switchToHomeView() {
-        stage.setScene(homeScene);
+    public void switchToScene(String name, String message) {
+        Scene scene = scenes.get(name);
+        BaseController controller = (BaseController) scene.getUserData();
+
+
+        if (controller instanceof EndViewController) {
+            ((EndViewController) controller).setMessage(message);
+            System.out.println("Resetting game");
+            GameController.reset();
+        }
+
+        stage.setScene(scene);
     }
-//    public void switchToGameView() {
-//        stage.setScene(gameScene);
+
+//    public BaseController getController(String name) {
+//        return controllers.get(name);
 //    }
 
 }
