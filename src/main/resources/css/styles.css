@@ -82,3 +82,12 @@
 .text-field:focused {
     -fx-background-color: #4B6EAF, white;
 }
+
+.end-label {
+    -fx-font-size: 64px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 0;
+    -fx-text-alignment: center;
+    -fx-text-fill: #ff0000;
+    -fx-background-color: #000000;
+}
