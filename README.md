@@ -1,5 +1,7 @@
 # Evasion Era - 11202 計算機概論 II Final Project
 
+![banner](images/banner.png)
+
 組員: 109403019 鄒翔宇、陳冠倩
 
 ## 目錄
