@@ -1,23 +1,9 @@
 package com.evasionera.controllers;
 
-import com.evasionera.EvasionEraApplication;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Objects;
-
-public class HomeController {
-
-    private EvasionEraApplication Main;
-
-    public void setMain(EvasionEraApplication Main) {
-        this.Main = Main;
-    }
+public class HomeController extends BaseController{
 
     @FXML
     private Button startButton;
@@ -28,12 +14,12 @@ public class HomeController {
 
     @FXML
     public void startGame() {
-        Main.switchToStartView();
+        main.switchToScene("setup");
     }
 
     @FXML
     public void showRules() {
-        Main.switchToRuleView();
+        main.switchToScene("rule");
     }
 }
 
