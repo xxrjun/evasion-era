@@ -28,6 +28,8 @@ public class GameSetupController extends BaseController {
 
     @FXML
     public void initialize() {
+        playerNameField.setText("Player");
+        ghostNameField.setText("Ghost");
         numStones.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 5, 2));
         gameDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 120, 60, 10));
     }
@@ -45,6 +47,8 @@ public class GameSetupController extends BaseController {
 
         // Start the game
         main.switchToScene("game");
+        gameController = (GameController) main.getController("game");
+        gameController.startGame();
     }
 
     @FXML

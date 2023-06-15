@@ -2,7 +2,6 @@ package com.evasionera;
 
 import com.evasionera.controllers.BaseController;
 import com.evasionera.controllers.EndViewController;
-import com.evasionera.controllers.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -66,8 +65,6 @@ public class EvasionEraApplication extends Application {
 
         if (controller instanceof EndViewController) {
             ((EndViewController) controller).setMessage(message);
-            System.out.println("Resetting game");
-            GameController.reset();
         }
 
         stage.setScene(scene);
