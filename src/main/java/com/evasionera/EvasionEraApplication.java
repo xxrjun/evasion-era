@@ -6,11 +6,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EvasionEraApplication extends Application {
 
@@ -24,12 +29,25 @@ public class EvasionEraApplication extends Application {
     // 儲存所有場景的HashMap
     private Map<String, Scene> scenes = new HashMap<>();
 
+    private MediaPlayer mediaPlayer;
+
     public static void main(String[] args) {
         launch(); // 啟動 JavaFX 程式
     }
 
     @Override
     public void start(Stage primaryStage) {
+        // 載入背景音樂，無限循環撥放
+        try{
+            Media media = new Media(getClass().getResource("/music/dark_mystery_soundridemusic.mp3").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.out.println("Error loading music: " + e.getMessage());
+        }
+
+
         this.stage = primaryStage; // 設定主要的視窗
         primaryStage.setWidth(WINDOW_WIDTH); // 設定視窗寬度
         primaryStage.setHeight(WINDOW_HEIGHT); // 設定視窗高度
@@ -64,7 +82,7 @@ public class EvasionEraApplication extends Application {
         BaseController controller = loader.getController(); // 取得場景的 Controller
         controller.setMain(this); // 設定 Controller 的主要類別
 
-        Scene scene = new Scene(root, WINDOW_WIDTH , WINDOW_HEIGHT); // 建立場景 Scene
+        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT); // 建立場景 Scene
         scene.setUserData(controller);  // 設定場景的 UserData 為 Controller，使控制器物件可以在場景切換時取得
 
 
@@ -84,7 +102,7 @@ public class EvasionEraApplication extends Application {
     /**
      * 切換場景
      *
-     * @param name 場景名稱
+     * @param name    場景名稱
      * @param message 於切換場景時傳遞的訊息
      */
     public void switchToScene(String name, String message) {
