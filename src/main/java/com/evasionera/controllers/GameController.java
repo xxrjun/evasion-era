@@ -18,9 +18,9 @@ import java.util.*;
 
 
 public class GameController extends BaseController {
+    public static final double WINDOW_WIDTH = 1600.0;
+    public static final double WINDOW_HEIGHT = 900.0;
     private static final Set<KeyCode> keys = new HashSet<>();
-    private static final double WINDOW_WIDTH = 1280.0;
-    private static final double WINDOW_HEIGHT = 720.0;
     private static boolean isGameOver = false;
     private static Player player;
     private static Ghost ghost;
@@ -46,19 +46,7 @@ public class GameController extends BaseController {
     private List<ImageView> stoneImages = new ArrayList<>();
     private List<Stone> stones = new ArrayList<>();
     private AnimationTimer gameTimer;
-    private int gameDuration = 60 * 1000 + 4 * 1000; // 遊戲預設時長為 60 秒，多加4秒是遊戲開始的誤差秒數
-
-    /**
-     * Reset game state to initial state
-     */
-    public void reset() {
-        isGameOver = false;
-        player = new Player(0, 400);
-        ghost = new Ghost(1200, 400);
-        clearStones();
-        startTime = System.currentTimeMillis();
-        keys.clear();
-    }
+    private int gameDuration = 60 * 1000; // 遊戲預設時長為 60 秒
 
     private void clearStones() {
         stones.clear();
@@ -67,10 +55,11 @@ public class GameController extends BaseController {
         }
         stoneImages.clear();
     }
+
     @FXML
     public void initialize() {
-        player = new Player(0, 400);
-        ghost = new Ghost(1200, 400);
+        player = new Player(0, WINDOW_HEIGHT / 2);
+        ghost = new Ghost(WINDOW_WIDTH, WINDOW_HEIGHT / 2);
         startTime = System.currentTimeMillis();
 
         gamePane.setFocusTraversable(true);
@@ -83,17 +72,19 @@ public class GameController extends BaseController {
         gameTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                handleKeys();
-                player.update();
-                updatePositions();
-                updateStones();
-                updateTime();
-                checkGameOver();
+                handleKeys();       // 處理按鍵
+                player.update();    // 更新玩家位置
+                updateStones();     // 更新石頭位置
+                updatePositions();  // 更新玩家、鬼、石頭位置
+                updateTime();       // 更新時間
+                checkCollisions();  // 檢查石頭與玩家、鬼的碰撞
+                checkGameOver();    // 檢查遊戲是否結束
             }
         };
     }
 
     public void startGame() {
+        isGameOver = false;
         startTime = System.currentTimeMillis();
         gameTimer.start();
     }
@@ -105,17 +96,23 @@ public class GameController extends BaseController {
         System.out.println("Stone Count: " + stoneCount);
         System.out.println("Duration: " + duration);
 
+
+        player = new Player(0, 400);
+        ghost = new Ghost(1540, 400);
+        clearStones();
+        keys.clear();
+
         GameController.playerName = playerName;
         GameController.ghostName = ghostName;
         this.stoneCount = stoneCount;
-        this.gameDuration = duration * 1000 + 4 * 1000; // Convert to milliseconds
+        this.gameDuration = duration * 1000; // Convert to milliseconds
 
         playerNameLabel.setText(playerName);
         ghostNameLabel.setText(ghostName);
 
         // Create stones
         for (int i = 0; i < stoneCount; i++) {
-            Stone stone = new Stone(Math.random() * WINDOW_WIDTH, Math.random() * WINDOW_HEIGHT);
+            Stone stone = new Stone();
             stones.add(stone);
 
             ImageView stoneImage = new ImageView(new Image("/images/stone.png"));
@@ -209,22 +206,15 @@ public class GameController extends BaseController {
         timeLabel.setText("Time: " + remainingTime / 1000);
     }
 
-    /**
-     * Check if game is over
-     */
-    private void checkGameOver() {
-        if (isGameOver) {
-            return;
-        }
-
+    private void checkCollisions() {
         for (Stone stone : stones) {
+            // 檢查玩家是否被石頭打到
             if (Math.abs(player.getX() - stone.getX()) < 50 && Math.abs(player.getY() - stone.getY()) < 50) {
-                System.out.println("Player hit by stone");
-                isGameOver = true;
-                reset();
-                main.switchToScene("end", "Ghost is Win!\nTime consuming: " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
-                break;
-            } else if (Math.abs(ghost.getX() - stone.getX()) < 50 && Math.abs(ghost.getY() - stone.getY()) < 50) {
+                player.hitByStone();
+            }
+
+            // 檢查鬼是否被石頭打到
+            if (Math.abs(ghost.getX() - stone.getX()) < 50 && Math.abs(ghost.getY() - stone.getY()) < 50) {
                 // Ghost is hit by stone, make it transparent and unable to move for 3 seconds
                 ghost.setTransparent(true);
                 ghost.setCanMove(false);
@@ -237,6 +227,15 @@ public class GameController extends BaseController {
                 }, 3000);
             }
         }
+    }
+
+    /**
+     * Check if game is over
+     */
+    private void checkGameOver() {
+        if (isGameOver) {
+            return;
+        }
 
         boolean playerCaught = Math.abs(player.getX() - ghost.getX()) < 50 && Math.abs(player.getY() - ghost.getY()) < 50;
         boolean timeUp = System.currentTimeMillis() - startTime >= gameDuration;
@@ -244,12 +243,10 @@ public class GameController extends BaseController {
         if (playerCaught) {
             System.out.println("Game Over, Ghost is Win!");
             isGameOver = true;
-            reset();
             main.switchToScene("end", "Ghost is Win!\nTime consuming: " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
         } else if (timeUp) {
             System.out.println("Game Over, Player is Win!");
             isGameOver = true;
-            reset();
             main.switchToScene("end", "Player is Win!");
         }
 
