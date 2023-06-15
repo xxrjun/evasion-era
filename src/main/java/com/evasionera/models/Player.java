@@ -41,7 +41,7 @@ public class Player {
     public void boost() {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastBoostTime > boostCooldown) {
-            System.out.println("Player Boosting!");
+            System.out.println("Player Boosting! Start: " + currentTime + " Last: " + lastBoostTime + " Cooldown: " + boostCooldown + " Duration: " + boostDuration + " Speed: " + speed + " Boost Speed: " + boostSpeed);
             speed = boostSpeed;
             lastBoostTime = currentTime;
         }

@@ -17,6 +17,10 @@ import java.util.Set;
 
 public class GameController extends BaseController {
     private static final Set<KeyCode> keys = new HashSet<>();
+    private static boolean isGameOver = false;
+    private static Player player;
+    private static Ghost ghost;
+    private static long startTime;
     @FXML
     private ImageView playerImage;
     @FXML
@@ -25,10 +29,21 @@ public class GameController extends BaseController {
     private Label timeLabel;
     @FXML
     private AnchorPane gamePane;
-    private static boolean isGameOver = false;
-    private static Player player;
-    private static Ghost ghost;
-    private static long startTime;
+    private String playerName;
+    private String ghostName;
+    private int stoneCount;
+    private int gameDuration = 60 * 1000 + 4 * 1000; // 遊戲預設時長為 60 秒，多加4秒是遊戲開始的誤差秒數
+
+    /**
+     * Reset game state to initial state
+     */
+    public static void reset() {
+        isGameOver = false;
+        player = new Player(0, 400);
+        ghost = new Ghost(1200, 400);
+        startTime = System.currentTimeMillis();
+        keys.clear();
+    }
 
     @FXML
     public void initialize() {
@@ -55,6 +70,19 @@ public class GameController extends BaseController {
         }.start();
     }
 
+    public void setupGame(String playerName, String ghostName, int stoneCount, int duration) {
+        // Set up the game with the given parameters
+        System.out.println("Player: " + playerName);
+        System.out.println("Ghost: " + ghostName);
+        System.out.println("Stone Count: " + stoneCount);
+        System.out.println("Duration: " + duration);
+
+        this.playerName = playerName;
+        this.ghostName = ghostName;
+        this.stoneCount = stoneCount;
+        this.gameDuration = duration * 1000 + 4 * 1000; // Convert to milliseconds
+
+    }
 
     /**
      * Handle key presses
@@ -109,7 +137,7 @@ public class GameController extends BaseController {
     private void updateTime() {
         long currentTime = System.currentTimeMillis();
         long elapsedTime = currentTime - startTime;
-        long remainingTime = 60000 - elapsedTime; // 60 seconds in milliseconds
+        long remainingTime = gameDuration - elapsedTime;
         timeLabel.setText("Time: " + remainingTime / 1000);
     }
 
@@ -125,21 +153,12 @@ public class GameController extends BaseController {
             System.out.println("Game Over, Ghost is Win!");
             isGameOver = true;
             main.switchToScene("end", "Ghost is Win!\nTime consuming: " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
-        } else if (System.currentTimeMillis() - startTime >= 60000) {
+        } else if (System.currentTimeMillis() - startTime >= gameDuration) {
             System.out.println("Game Over, Player is Win!");
             isGameOver = true;
             main.switchToScene("end", "Player is Win!");
         }
     }
-
-    /**
-     * Reset game state to initial state
-     */
-    public static void reset() {
-        isGameOver = false;
-        player = new Player(0, 400);
-        ghost = new Ghost(1200, 400);
-        startTime = System.currentTimeMillis();
-        keys.clear();
-    }
 }
+
+

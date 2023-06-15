@@ -39,9 +39,9 @@ public class GameSetupController extends BaseController {
         int stoneCount = numStones.getValue();
         int duration = gameDuration.getValue();
 
-//        // Pass the parameters to the GameController
-//        GameController gameController = (GameController) main.getController("game");
-//        gameController.setupGame(playerName, ghostName, stoneCount, duration);
+        // Pass the parameters to the GameController
+        GameController gameController = (GameController) main.getController("game");
+        gameController.setupGame(playerName, ghostName, stoneCount, duration);
 
         // Start the game
         main.switchToScene("game");

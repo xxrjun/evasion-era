@@ -1,6 +1,8 @@
 package com.evasionera;
 
-import com.evasionera.controllers.*;
+import com.evasionera.controllers.BaseController;
+import com.evasionera.controllers.EndViewController;
+import com.evasionera.controllers.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,12 +15,12 @@ import java.util.Map;
 
 public class EvasionEraApplication extends Application {
 
-    public static void main(String[] args) {
-        launch();
-    }
     private Stage stage;
     private Map<String, Scene> scenes = new HashMap<>();
 
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -30,7 +32,7 @@ public class EvasionEraApplication extends Application {
             scenes.put("rule", loadScene("/com/evasionera/rule-view.fxml"));
             scenes.put("game", loadScene("/com/evasionera/game-view.fxml"));
             scenes.put("end", loadScene("/com/evasionera/end-view.fxml"));
-        } catch (IOException e){
+        } catch (IOException e) {
 
         }
 
@@ -54,9 +56,6 @@ public class EvasionEraApplication extends Application {
 
     public void switchToScene(String name) {
         Scene scene = scenes.get(name);
-
-        BaseController controller = (BaseController) scene.getUserData();
-
         stage.setScene(scene);
     }
 
@@ -74,8 +73,9 @@ public class EvasionEraApplication extends Application {
         stage.setScene(scene);
     }
 
-//    public BaseController getController(String name) {
-//        return controllers.get(name);
-//    }
+    public BaseController getController(String name) {
+        Scene scene = scenes.get(name);
+        return (BaseController) scene.getUserData();
+    }
 
 }
