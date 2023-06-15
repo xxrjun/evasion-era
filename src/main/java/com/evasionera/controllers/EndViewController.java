@@ -13,11 +13,6 @@ public class EndViewController extends BaseController {
     }
 
     @FXML
-    public void handlePlayAgain() {
-        main.switchToScene("game");
-    }
-
-    @FXML
     public void switchToHomeView() {
         main.switchToScene("home");
     }
