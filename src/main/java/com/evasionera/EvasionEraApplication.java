@@ -17,6 +17,9 @@ public class EvasionEraApplication extends Application {
     private Stage stage;
     private Map<String, Scene> scenes = new HashMap<>();
 
+    public static final double WINDOW_WIDTH = 1600.0;
+    public static final double WINDOW_HEIGHT = 900.0;
+
     public static void main(String[] args) {
         launch();
     }
@@ -24,6 +27,8 @@ public class EvasionEraApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
+        primaryStage.setWidth(WINDOW_WIDTH);
+        primaryStage.setHeight(WINDOW_HEIGHT);
 
         try {
             scenes.put("home", loadScene("/com/evasionera/home-view.fxml"));

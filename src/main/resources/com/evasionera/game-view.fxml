@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane fx:id="gamePane" opacity="0.75" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/styles.css"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.evasionera.controllers.GameController">
-    <ImageView fx:id="ghostImage" fitHeight="50.0" fitWidth="50.0"  pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@../../images/ghost.png"/>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane fx:id="gamePane" opacity="0.85" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.evasionera.controllers.GameController">
+    <Label fx:id="ghostNameLabel" />
+    <ImageView fx:id="ghostImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+
+        <Image url="@../../images/ghost.png" />
     </ImageView>
 
-    <ImageView fx:id="playerImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@../../images/player.png"/>
+    <Label fx:id="playerNameLabel" />
+    <ImageView fx:id="playerImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../images/player.png" />
     </ImageView>
-    <Label fx:id="timeLabel" text="Time: 60"/>
+    <Label fx:id="timeLabel" text="Time: 60">
+      <effect>
+         <DropShadow>
+            <color>
+               <Color red="1.0" />
+            </color>
+         </DropShadow>
+      </effect></Label>
 </AnchorPane>

@@ -2,40 +2,49 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/styles.css"
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../css/styles.css"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.evasionera.controllers.GameSetupController">
-    <Text fill="#ea0000" layoutX="328.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title"
-          text="Play Evasion Era!"/>
-    <VBox alignment="CENTER" layoutX="242.0" layoutY="217.0" prefHeight="472.0" prefWidth="796.0" spacing="25.0"
-          style="-fx-background-color: rgba(0, 0, 0, 0.85);" AnchorPane.bottomAnchor="31.0"
-          AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="217.0">
-        <HBox alignment="CENTER" spacing="10">
-            <Label text="Player Name:"/>
-            <TextField fx:id="playerNameField"/>
-        </HBox>
-        <HBox alignment="CENTER" spacing="10">
-            <Label text="Ghost Name:"/>
-            <TextField fx:id="ghostNameField"/>
-        </HBox>
-        <HBox alignment="CENTER" spacing="10">
-            <Label text="Number of Stones:"/>
-            <Spinner fx:id="numStones" initialValue="2" max="5" min="2"/>
-        </HBox>
-        <HBox alignment="CENTER" spacing="10">
-            <Label text="Game Duration:"/>
-            <Spinner fx:id="gameDuration" initialValue="60" min="30" max="120" />
-        </HBox>
-        <Button onAction="#startGame" styleClass="small-button" text="Start Game"/>
-        <Button onAction="#switchToHomeView" prefWidth="218.0" styleClass="small-button" text="Back to Home"/>
+    <Text fill="#ea0000" layoutX="481.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title"
+          text="Play Evasion Era!">
         <effect>
-            <Reflection fraction="1.0" topOpacity="0.1"/>
+            <DropShadow height="28.02" radius="12.34" width="23.34">
+                <color>
+                    <Color red="1.0"/>
+                </color>
+            </DropShadow>
+        </effect>
+    </Text>
+
+    <Button layoutX="665.0" layoutY="653.0" onAction="#startGame" styleClass="small-button" text="Start Game"/>
+    <Button layoutX="665.0" layoutY="739.0" onAction="#switchToHomeView" prefWidth="218.0" styleClass="small-button"
+            text="Back to Home"/>
+    <Pane layoutX="339.0" layoutY="212.0" opacity="0.85" prefHeight="404.0" prefWidth="916.0" styleClass="rule-box">
+        <HBox alignment="CENTER" spacing="10"/>
+        <HBox alignment="CENTER" spacing="10"/>
+        <HBox alignment="CENTER" spacing="10"/>
+        <HBox alignment="CENTER" spacing="10"/>
+        <Label layoutX="147.0" layoutY="324.0" text="Game Duration:"/>
+        <Spinner fx:id="gameDuration" initialValue="60" layoutX="397.0" layoutY="313.0" max="120" min="30"/>
+        <Spinner fx:id="numStones" initialValue="2" layoutX="397.0" layoutY="240.0" max="5" min="2"/>
+        <TextField fx:id="ghostNameField" layoutX="397.0" layoutY="159.0"/>
+        <Label layoutX="147.0" layoutY="251.0" text="Number of Stones:"/>
+        <TextField fx:id="playerNameField" layoutX="397.0" layoutY="80.0"/>
+        <Label layoutX="146.0" layoutY="170.0" text="Ghost Name:"/>
+        <Label layoutX="146.0" layoutY="91.0" text="Player Name:"/>
+        <effect>
+            <DropShadow>
+                <color>
+                    <Color red="1.0" green="1.0" blue="1.0"/>
+                </color>
+            </DropShadow>
         </effect>
         <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
         </padding>
-    </VBox>
+    </Pane>
 </AnchorPane>

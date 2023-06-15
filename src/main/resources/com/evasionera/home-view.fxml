@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/styles.css"
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../css/styles.css"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.evasionera.controllers.HomeController">
-    <Text fill="#ea0000" layoutX="172.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title"
-          text="Welcome to Evasion Era!"/>
-    <VBox alignment="CENTER" layoutX="350.0" layoutY="253.0" prefHeight="356.0" prefWidth="580.0" spacing="20"
-    >
-        <Button fx:id="rulesButton" onAction="#showRules" styleClass="big-button" text="Game Rules &amp; Instructions"/>
-        <Button fx:id="startButton" onAction="#startGame" styleClass="big-button" text="Start Game!"/>
-
-    </VBox>
-
+    <Text fill="#ea0000" layoutX="332.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title"
+          text="Welcome to Evasion Era!">
+        <effect>
+            <DropShadow height="28.02" radius="12.34" width="23.34">
+                <color>
+                    <Color red="1.0"/>
+                </color>
+            </DropShadow>
+        </effect>
+    </Text>
+    <Button fx:id="rulesButton" layoutX="610.0" layoutY="465.0" onAction="#showRules" styleClass="big-button"
+            text="Game Rules &amp; Instructions"/>
+    <Button fx:id="startButton" layoutX="610.0" layoutY="595.0" onAction="#startGame" styleClass="big-button"
+            text="Start Game!">
+    </Button>
 </AnchorPane>
