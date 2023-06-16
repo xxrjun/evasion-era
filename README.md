@@ -3,7 +3,8 @@
 ![banner](images/banner.png)
 
 學生: 109403019 鄒翔宇
-DEMO: https://youtu.be/gPuleGg4EC8
+
+Demo Video: https://youtu.be/gPuleGg4EC8
 
 ## 目錄
 
