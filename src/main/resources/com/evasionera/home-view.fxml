@@ -18,9 +18,9 @@
             </DropShadow>
         </effect>
     </Text>
-    <Button fx:id="rulesButton" layoutX="610.0" layoutY="465.0" onAction="#showRules" styleClass="big-button"
+    <Button layoutX="610.0" layoutY="465.0" onAction="#showRules" styleClass="big-button"
             text="Game Rules &amp; Instructions"/>
-    <Button fx:id="startButton" layoutX="610.0" layoutY="595.0" onAction="#startGame" styleClass="big-button"
+    <Button layoutX="610.0" layoutY="595.0" onAction="#startGame" styleClass="big-button"
             text="Start Game!">
     </Button>
 </AnchorPane>

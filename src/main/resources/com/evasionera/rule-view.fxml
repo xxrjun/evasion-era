@@ -23,13 +23,17 @@
     <VBox layoutX="285.0" layoutY="204.0" opacity="0.85" prefHeight="506.0" prefWidth="1030.0" spacing="10.0"
           styleClass="rule-box">
         <Label styleClass="rule-title" text="遊戲規則"/>
-        <Label styleClass="rule-text" text="1. 遊戲時限 60 秒。"/>
+        <Label styleClass="rule-text" text="1. 遊戲時限預設為 60 秒，可設置 10~120 秒。"/>
         <Label styleClass="rule-text" text="2. 鬼在時限內抓到人，鬼為勝利者。反之若沒有在時限內抓到人，人為勝利者。"/>
-        <Label styleClass="rule-text" text="3. 鬼因為是鬼，若是被石頭砸到，5 秒後會於原地復活。"/>
-        <Label styleClass="rule-text" text="4. 人若是被石頭砸到，則遊戲結束。"/>
+        <Label styleClass="rule-text"
+               text="3. 使用者可以輸入石頭數量，預設為 2 顆下限，為避免畫面過於繁雜上限最多 10 顆。"/>
+        <Label styleClass="rule-text"
+               text="4. 鬼若是被石頭砸到，3 秒後會於原地復活，復活期間會變半透明狀態。人若是碰到仍算被抓到。"/>
+        <Label styleClass="rule-text" text="5. 人若是被石頭砸到，則暈頭減速 0.45 秒，且不可使用特殊能力解除。"/>
         <Label styleClass="rule-title" text="操作教學"/>
         <Label styleClass="rule-text"
-               text="人: 鍵盤 WSAD 控制移動，空白鍵使用特殊能力(短暫加速 1.5 秒)。特殊能力冷卻時間 5 秒。"/>
+               text="人: 鍵盤 WSAD 控制移動，空白鍵使用特殊能力(短暫加速 1.2 秒)。特殊能力冷卻時間 5 秒，"/>
+        <Label styleClass="rule-text" text="     也就是每 5 秒即可使用一次。"/>
         <Label styleClass="rule-text" text="鬼: 鍵盤上下左右鍵控制移動。鬼的速度略快於人"/>
         <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
@@ -42,8 +46,8 @@
             </DropShadow>
         </effect>
     </VBox>
-    <Button layoutX="610.0" layoutY="741.0" onAction="#switchToHomeView" prefHeight="80.0" prefWidth="243.0"
-            styleClass="big-button" text="Back to Home">
+    <Button layoutX="665.0" layoutY="780.0" onAction="#switchToHomeView" prefHeight="80.0" prefWidth="243.0"
+            styleClass="small-button" text="Back to Home">
         <effect>
             <DropShadow height="36.21" radius="21.405" width="51.41">
                 <color>
