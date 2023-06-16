@@ -1,4 +1,3 @@
-// GameController.java
 package com.evasionera.controllers;
 
 import com.evasionera.models.Ghost;

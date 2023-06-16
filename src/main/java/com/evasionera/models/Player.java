@@ -65,6 +65,8 @@ public class Player {
 
     /**
      * 更新玩家的狀態
+     * - 玩家技能時間是否結束，若結束則恢復正常速度
+     * - 玩家是否被石頭暈眩的狀態，若是則速度為減速後的速度
      */
     public void update() {
         long currentTime = System.currentTimeMillis();
@@ -75,10 +77,16 @@ public class Player {
         }
     }
 
+    /**
+     * 玩家被石頭砸中，設定為被石頭砸中的時間
+     */
     public void hitByStone() {
         lastHitTime = System.currentTimeMillis();
     }
 
+    /**
+     * 檢查玩家是否超出視窗範圍，如果超出則將玩家移回視窗範圍內
+     */
     private void checkBounds() {
         if (x < 0) {
             x = 0;

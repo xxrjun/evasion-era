@@ -7,19 +7,14 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 
 public class GameSetupController extends BaseController {
-
     @FXML
     private TextField playerNameField;
-
     @FXML
     private TextField ghostNameField;
-
     @FXML
     private Spinner<Integer> gameDuration;
-
     @FXML
     private Spinner<Integer> numStones;
-
     private EvasionEraApplication main;
 
     public void setMain(EvasionEraApplication main) {

@@ -28,6 +28,14 @@ public class Stone {
         dy = Math.sin(angle) * SPEED;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
     /**
      * 更新石頭的位置、碰到邊界時的反彈、反彈後的加速
      */
@@ -45,14 +53,6 @@ public class Stone {
             dy *= -1; // 反彈(逆轉方向)
             SPEED *= 1.02; // 反彈後加速，所以加速較慢
         }
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
     }
 
     /**
@@ -81,4 +81,6 @@ public class Stone {
             }, 3000);
         }
     }
+
+
 }
