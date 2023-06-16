@@ -1,4 +1,4 @@
-# Evasion Era - 11202 計算機概論 II Final Project
+# Evasion Era - 1112 計算機概論 II Final Project
 
 ![banner](images/banner.png)
 
@@ -8,13 +8,14 @@ Demo Video: https://youtu.be/gPuleGg4EC8
 
 ## 目錄
 
-- [Evasion Era - 11202 計算機概論 II Final Project](#evasion-era---11202-計算機概論-ii-final-project)
+- [Evasion Era - 1112 計算機概論 II Final Project](#evasion-era---1112-計算機概論-ii-final-project)
   - [目錄](#目錄)
   - [Usage](#usage)
     - [Prerequisite](#prerequisite)
     - [Clone Project](#clone-project)
-    - [Run in Terminal](#run-in-terminal)
-    - [In IDE(like IntelliJ IDEA)](#in-idelike-intellij-idea)
+    - [Run](#run)
+      - [Run in Terminal](#run-in-terminal)
+      - [In IDE(like IntelliJ IDEA)](#in-idelike-intellij-idea)
   - [遊戲簡介](#遊戲簡介)
     - [專案樹狀結構](#專案樹狀結構)
   - [遊戲流程](#遊戲流程)
@@ -44,7 +45,11 @@ git clone
 cd evasion-era
 ```
 
-### Run in Terminal
+### Run
+
+> 有兩種執行方式
+
+#### Run in Terminal
 
 ```bash
 mvn clean javafx:run
@@ -80,7 +85,7 @@ mvn clean javafx:run
 
    ``` -->
 
-### In IDE(like IntelliJ IDEA)
+#### In IDE(like IntelliJ IDEA)
 
 添加 VM options 才可執行，別忘記修改 `path/to/javafx/sdk` 成自己電腦的 JavaFX SDK 的路徑。
 
