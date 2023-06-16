@@ -47,25 +47,39 @@ cd evasion-era
 mvn clean javafx:run
 ```
 
-### 打包成可執行檔
+[//]: # (### 打包成可執行檔)
 
-1. Build
-    ```bash
-    mvn clean package
-    ```
+[//]: # ()
+[//]: # (1. Build)
 
-2. 創建JavaFX運行時映像
-   
-    使用 jlink 打包成 runtime 後執行，記得修改 `/path/to/javafx/sdk` 為自己SDK的路徑。
-   
-3. jlink --module-path "D:\javafx-sdk-17.0.7\lib" --add-modules javafx.controls,javafx.fxml,javafx.media --output javafx-runtime
-   ```bash
-    jlink --module-path /path/to/javafx/sdk --add-modules javafx.controls,javafx.fxml,javafx.media --output javafx-runtime
-    ```
-3. 執行
-    ```bash
-    javafx-runtime/bin/java -jar target/evasion-era-1.0.jar
-    ```
+[//]: # (    ```bash)
+
+[//]: # (    mvn clean package)
+
+[//]: # (    ```)
+
+[//]: # ()
+[//]: # (2. 創建JavaFX運行時映像)
+
+[//]: # (   )
+[//]: # (    使用 jlink 打包成 runtime 後執行，記得修改 `/path/to/javafx/sdk` 為自己SDK的路徑。)
+
+[//]: # (   )
+[//]: # (3. jlink --module-path "D:\javafx-sdk-17.0.7\lib" --add-modules javafx.controls,javafx.fxml,javafx.media --output javafx-runtime)
+
+[//]: # (   ```bash)
+
+[//]: # (    jlink --module-path /path/to/javafx/sdk --add-modules javafx.controls,javafx.fxml,javafx.media --output javafx-runtime)
+
+[//]: # (    ```)
+
+[//]: # (3. 執行)
+
+[//]: # (    ```bash)
+
+[//]: # (    javafx-runtime/bin/java -jar target/evasion-era-1.0.jar)
+
+[//]: # (    ```)
 
 ### In IDE(like IntelliJ IDEA)
 
