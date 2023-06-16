@@ -2,7 +2,8 @@
 
 ![banner](images/banner.png)
 
-組員: 109403019 鄒翔宇
+學生: 109403019 鄒翔宇
+DEMO: https://youtu.be/gPuleGg4EC8
 
 ## 目錄
 
@@ -80,7 +81,7 @@ mvn clean javafx:run
 
 ### In IDE(like IntelliJ IDEA)
 
-添加 VM options 才可執行，記得修改 `path/to/javafx/sdk` 為自己 SDK 的路徑。
+添加 VM options 才可執行，別忘記修改 `path/to/javafx/sdk` 成自己電腦的 JavaFX SDK 的路徑。
 
 ```bash
 --module-path path/to/javafx/sdk --add-modules javafx.controls,javafx.fxml,javafx.media
