@@ -1,5 +1,7 @@
 .root {
     -fx-background-image: url('../images/background.jpg');
+    -fx-background-position: left center;
+    -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
 
@@ -13,7 +15,7 @@
     #9d4024,
     #d86e3a,
     radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 55, 0, 0.72), 0, 4, 0, 4);
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 0, 0, 0.72), 0, 6, 0, 4);
     -fx-font-weight: bold;
     -fx-font-size: 26px;
 }
@@ -29,7 +31,7 @@
     #9d4024,
     #d86e3a,
     radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 55, 0, 0.72), 0, 4, 0, 4);
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 0, 0, 0.72), 0, 6, 0, 4);
     -fx-font-weight: bold;
     -fx-padding: 10 20 10 20;
 }
