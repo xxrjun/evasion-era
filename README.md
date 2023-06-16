@@ -95,18 +95,20 @@ mvn clean javafx:run
 
 ### 專案樹狀結構
 
+> 方便快速瀏覽專案的架構
+
 ```bash
-├── README.md # 專案說明文件
-├── images # 專案圖片
+├── README.md        # 專案說明文件
+├── images           # 專案圖片
 │   ├── banner.png
 │   ├── end.png
 │   ├── game-setup.png
 │   ├── game.png
 │   └── rule.png
-├── mvnw # maven wrapper
+├── mvnw             # maven wrapper
 ├── mvnw.cmd
-├── pom.xml # maven 設定檔
-└── src # 專案原始碼
+├── pom.xml          # maven 設定檔
+└── src              # 專案原始碼
     └── main
         ├── java
         │   └── com
@@ -123,9 +125,9 @@ mvn clean javafx:run
         │               ├── Ghost.java
         │               ├── Player.java
         │               └── Stone.java
-        └── resources                              # 靜態資源
+        └── resources                               # 靜態資源
             ├── com
-            │   └── evasionera                    # FXML 檔案
+            │   └── evasionera                      # FXML 檔案
             │       ├── end-view.fxml
             │       ├── game-setup-view.fxml
             │       ├── game-view.fxml
@@ -143,6 +145,25 @@ mvn clean javafx:run
 ```
 
 ## 遊戲流程
+
+```mermaid
+graph TB
+  Home(("首頁 (home-view.fxml)")):::view
+  GameSetup["遊戲設置畫面 (game-setup.fxml)"]:::view
+  RuleView["遊戲規則 & 操作教學 (rule-view.fxml)"]:::view
+  GameView["遊戲進行畫面 (game-view.fxml)"]:::view
+  EndView["遊戲結束畫面 (end-view.fxml)"]:::view
+
+  Home -->|開始遊戲| GameSetup:::action
+  Home -->|遊戲規則 & 操作教學| RuleView:::action
+  GameSetup -->|Back to Home| Home:::action
+  RuleView -->|Back to Home| Home:::action
+  GameSetup -->|設置完成| GameView:::action
+  GameView -->|遊戲結束| EndView:::action
+  EndView -->|Back to Home| Home:::action
+
+  classDef action fill:#000,stroke:#333,stroke-width:2px;
+```
 
 ### 首頁 (`home-view.fxml`)
 
