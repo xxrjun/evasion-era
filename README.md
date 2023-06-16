@@ -278,7 +278,7 @@ Improvements & Bugs
   - [首頁背景圖片](https://unsplash.com/photos/I0oihJbNSIc)
   - [Ghost](https://www.clipartmax.com/max/m2H7K9m2G6m2m2N4/)
   - [Player](https://www.pngegg.com/en/png-bnfyu/download)
-  - [Stone]()
+  - [Stone](https://www.flaticon.com/free-icons/rock)
     - <a href="https://www.flaticon.com/free-icons/rock" title="rock icons">Rock icons created by Icongeek26 -
       Flaticon</a>
 - 背景音樂: https://fanlink.to/DarkMystery
