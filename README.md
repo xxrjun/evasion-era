@@ -251,6 +251,7 @@ Improvements & Bugs
 - [x] bugs: 在設置遊戲頁面時，遊戲時間已經在倒數
 - [x] feat: 遊戲平衡，實際遊玩發現石頭可以直接把人砸死對於人過於劣勢，因此修改成石頭砸到人會減速 0.45 秒
 - [x] feat: 添加背景音樂
+- [ ] bugs: 鬼連續碰到石頭有時會出現負面效果失效的狀況
 
 ## 開發工具
 
@@ -271,14 +272,16 @@ Improvements & Bugs
 
 ## 參考資料
 
-- 按鈕的 CSS 樣式[Button CSS](http://fxexperience.com/2011/12/styling-fx-buttons-with-css/)
-- 協作工具[ChatGPT 4.0](https://chat.openai.com/)，主要用於詢問優化程式碼的部分。
-
-- 圖片
-  - [首頁背景圖片](https://unsplash.com/photos/I0oihJbNSIc)
-  - [Ghost](https://www.clipartmax.com/max/m2H7K9m2G6m2m2N4/)
-  - [Player](https://www.pngegg.com/en/png-bnfyu/download)
-  - [Stone](https://www.flaticon.com/free-icons/rock)
-    - <a href="https://www.flaticon.com/free-icons/rock" title="rock icons">Rock icons created by Icongeek26 -
-      Flaticon</a>
-- 背景音樂: https://fanlink.to/DarkMystery
+1. JavaFX 官方文件: https://openjfx.io/javadoc/17/
+2. 流程圖撰寫工具: Mermaidv10.2.3 Live Editor
+3. 按鈕的 CSS 樣式: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
+4. Maven 套件網站: https://mvnrepository.com/
+5. 協作工具(主要用於修正錯誤、優化程式碼): https://chat.openai.com/
+6. 圖片:
+   - 首頁背景圖片: https://unsplash.com/photos/I0oihJbNSIc
+   - Ghost: https://www.clipartmax.com/max/m2H7K9m2G6m2m2N4/
+   - Player: https://www.pngegg.com/en/png-bnfyu/download
+   - Stone (created by Icongeek26 - Flaticon): https://www.flaticon.com/free-icons/rock
+7. 背景音樂: https://fanlink.to/DarkMystery
+8. Bro Code - JavaFX Tutorial Playlist:
+   https://youtu.be/_7OM-cMYWbQ?list=PLZPZq0r_RZOM-8vJA3NQFZB7JroDcMwev
